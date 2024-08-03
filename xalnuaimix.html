@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #ffffff;
+            background-color: #000000;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h3 {
+            color: #ffffff;
+        }
+
+        #name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #ip-address, #ip-info {
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+        }
+
+        .cmd-text-container {
+            position: relative;
+            top: -15px;
+        }
+
+        .cmd-text {
+            font-size: 17px;
+            color: black;
+            position: absolute;
+            white-space: nowrap;
+            animation: scrollText 20s linear infinite;
+            text-stroke: 3px black;
+        }
+
+        .cmd-text:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .animated-text {
+            animation: lightning 1s linear infinite;
+        }
+
+        @keyframes lightning {
+            0% { color: rgb(255, 0, 0); }
+            50% { color: rgb(0, 0, 0); }
+            100% { color: white; }
+        }
+
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            object-fit: cover;
+            filter: blur(10px);
+        }
+
+        audio {
+            display: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1></h1>
+    
+    <div>
+        <img border="0" src="https://i.pinimg.com/originals/b7/6b/d2/b76bd2630f87a368d908d6835ab5b2ed.gif" width="auto" height="256">
+    </div>
+
+    <div>
+        <span style="color: rgb(255, 0, 0);">Hacked By</span>
+        <span id="name"></span>
+    </div>
+    
+    <div>
+        <a href="https://discord.gg/138" style="font-size: 24px; color: rgb(255, 255, 255); text-decoration: none;">Discord.gg/138</a>
+    </div>
+
+    <div class="cmd-text-container">
+        <div class="cmd-text">FUCK system</div>
+    </div>
+
+    <h3 class="animated-text"># 𝗔𝗟𝗡𝗨𝗔𝗜𝗠𝗜 𝗙𝗨𝗖𝗞𝗘𝗗 𝗬𝗢𝗨</h3>
+
+    <p id="ip-address">
+        <span>Your IP Address: </span>
+        <span id="ip-address-value" style="font-size: 17px;">Loading...</span>
+    </p>
+
+    <h3>Your IP Info:</h3>
+    <pre id="ip-info" class="json-data">Fetching...</pre>
+
+    <audio autoplay loop>
+        <source src="https://audio.jukehost.co.uk/zIEiDh47YpDQrHsEUnvaS8ozFzEYxVcn.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <video autoplay loop muted>
+        <source src="https://www.youtube.com/embed/XIMLoLxmTDw?autoplay=1&loop=1&playlist=XIMLoLxmTDw" type="video/mp4">
+        Your browser does not support the video element.
+    </video>
+
+    <script>
+        var names = [
+            { name: "[ # Alnuaimi .، ]", color: "red" },
+            { name: "[ # Alnuaimi .، ]", color: "white" }
+        ];
+
+        var nameIndex = 0;
+
+        function changeNames() {
+            var currentName = names[nameIndex];
+            document.getElementById("name").textContent = currentName.name;
+            document.getElementById("name").style.color = currentName.color;
+            nameIndex = (nameIndex + 1) % names.length;
+        }
+
+        setInterval(changeNames, 1000);
+
+        function fetchIPAndInfo() {
+            fetch('https://api.ipify.org/?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip-address-value').textContent = data.ip;
+                    return data.ip;
+                })
+                .then(ip => fetch(`https://ipinfo.io/${ip}/json`))
+                .then(response => response.json())
+                .then(ipInfoData => {
+                    document.getElementById('ip-info').textContent = JSON.stringify(ipInfoData, null, 2);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('ip-address-value').textContent = 'Unable to fetch IP address.';
+                    document.getElementById('ip-info').textContent = 'Unable to fetch IP information.';
+                });
+        }
+
+        fetchIPAndInfo();
+
+        // Create stars
+        function createStars() {
+            const numStars = 100;
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.animationDuration = Math.random() * 5 + 1 + 's';
+                document.body.appendChild(star);
+            }
+        }
+
+        createStars();
+    </script>
+</body>
+</html>

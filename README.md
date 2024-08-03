@@ -1,2 +1,0 @@
-# xAlnuaimi.github.io
-nothing
